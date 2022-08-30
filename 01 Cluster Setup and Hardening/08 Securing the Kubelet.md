@@ -1,0 +1,83 @@
+# Securing the `kubelet`
+
+The `kubelet` is like the captain on the ship.  He does all the work and reports back to the master.
+
+`kubeadm` does not install the `kubelet` service but it can help with configuring.  
+In version of Kubernetes older than 1.10 all of the `kubelet` config was done in the `kubelet` start command but as of 1.10 may of those options were moved to the `kubelet-config.yaml` file and `kubeadm` helps configure that file when you run the `kubeadm join` command.
+
+Note: Although configuration can be set in either the kubelet service config or in the `kubelet-config.yaml` file it is highly recommended that the `kubelet-config.yaml` file is used.
+
+To know what options the `kubelet` was started with we can inspect the kubelet process on the node.  
+`ps -aux | grep kubelet`  
+In the results we see the `--config=/var/lib/kubelet/config.yaml` is telling us where mos of the config is located.  
+
+The `kubelet` serves its API on two ports:  
+
+| Port    | Description |
+| ------- | ----------- |
+| 10250   | Serves API that allows full access |
+| 10255   | Serves API that allows unauthenticated read-only access |
+
+By default the `kubelet` allows anyone to access either API endpoint without authentication which is very dangerous.  
+To disable anonymous access set  
+```sh
+# cat /etc/systemd/system/kubelet.service
+--anonymous-auth=false
+```  
+in the `kubelet` service configuration file or the external `kubelet-config.yaml`  
+```yaml
+authentication:
+  anonymous:
+    enabled: false
+```
+
+There are two Authentication mechanisms the kubelet supports, Certificates and Bearer Tokens.  
+
+## `kubelet` Certificate Based Authentication
+The recommended method is to use Certificate based authentication by setting the
+```sh
+# cat /etc/systemd/system/kubelet.service
+--client-ca-file
+```
+ in the kubelet service config or the external `kubelet-config.yaml`
+```yaml
+authentication:
+  x50:
+    clientCAFile: /path/to/c.crt
+```
+
+The `kube-apiserver` muster also have the kubelet client certificates configured.  
+Note: We often think as the `kube-apiserver` as only a server supporting clients, but in this instance it is the client calling the `kubelet`  
+```sh
+# cat /etc/systemd/system/kube-apiserver.service
+--kubelet-client-certificate=/path/to/kubelet-cert.pem
+--kubelet-client-key=/path/to/kubelet-key.pem
+```
+
+## Authorization
+
+Once the user gains access to the system, what can they access?  
+The default authorization mode is `AlwaysAllow`, to prevent this we set the authorization mode to webhook.  
+```sh
+# cat /etc/systemd/system/kubelet.service
+--authorization-mode=Webhook
+```
+```yaml
+# kubelet-config.yaml
+authentication:
+  mode: Webhook
+```
+In this mode the kubelet sends a request to the api-server to see if it should approve or reject the request.
+
+### Metrics Server
+
+The metrics server usually runs on port 10255 and is read allow by all.  To disable the set the port to 0.  If the `kubelet` was configured by `kubeadm` then the port will be set to 0 in the `kubelet-config.yaml` file.  
+```yaml
+# kubelet-config.yaml
+readOnlyPort: 0
+```
+or in the service config:  
+```sh
+# cat /etc/systemd/system/kubelet.service
+--read-only-port:0
+```
