@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: test-audit
+  name: test-audit
+spec:
+  securityContext:
+    seccompProfile:
+      type: Localhost
+      # This path must be relative to k8s default seccomp profile which is stored in /var/lib/kubelet/seccomp/
+      localhostProfile: profiles/audit.json
+  nodeName: lpul-k8stestwrk09
+  containers:
+  - command: ["bash", "-c", "echo 'I just made some syscalls' && sleep 100"]
+    image: ubuntu
+    name: ubuntu
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
