@@ -9,7 +9,7 @@ There are a number of Admission Controllers that come with recent Kubernetes ver
 - NamespaceExists
 - Many More
 
-We can see which admission controllers are active by interagating the kube-apiserver
+We can see which admission controllers are active by interrogating the `kube-apiserver`
 ```sh
 kube-apiserver -h | grep enable-admission-plugins
 
@@ -29,7 +29,7 @@ Output
 . . . --enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota,NodeRestriction,Priority,TaintNodesByCondition,PersistentVolumeClaimResize,PodSecurityPolicy . . .
 ```
 
-To add an admission controller update the `--enable-admission-plugins` paramater where the kube-apiserver is configured.  We can also disable using the `--disable-admission-plugins`
+To add an admission controller update the `--enable-admission-plugins` paramater where the `kube-apiserver` is configured.  We can also disable using the `--disable-admission-plugins`
 ```sh
 ...
 --v=2
@@ -38,6 +38,6 @@ To add an admission controller update the `--enable-admission-plugins` paramater
 ...
 ```
 
-Note that the NamespaceExists and NamespaceAutoProvision admission controllers are deprecated and now replaced by NamespaceLifecycle admission controller.
+Note that the `NamespaceExists` and `NamespaceAutoProvision` admission controllers are deprecated and now replaced by `NamespaceLifecycle` admission controller
 
-The NamespaceLifecycle admission controller will make sure that requests to a non-existent namespace is rejected and that the default namespaces such as default, kube-system and kube-public cannot be deleted.
+The `NamespaceLifecycle` admission controller will make sure that requests to a non-existent namespace is rejected and that the default namespaces such as `default`, `kube-system` and `kube-public` cannot be deleted

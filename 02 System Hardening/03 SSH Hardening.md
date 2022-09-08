@@ -2,7 +2,7 @@
 
 ```sh
 # Generate a new public private key pair into the ~/.ssh directory
-ssh-keygen # default sto -t rsa
+ssh-keygen # default type is '-t rsa'
 
 # Copy public key to remote server
 ssh-copy-id mark@node01
@@ -18,7 +18,7 @@ vi /etc/ssh/sshd_config
 PermitRootLogin no
  
 # Disable password based authentication
-# Make sure there are public keys that can access the node first.
+# Make sure there are public keys that can access the node first
 PasswordAuthentication no
 
 # exit and save then reload sshd
@@ -26,10 +26,10 @@ systemctl reload sshd
 ```
 Refer to section 5.2 of the CIS Benchmarks for distribution independent Linux
 
-## Reference links
+## References
 
-Download the CIS benchmark PDF’s from the below link:
-
+Download the CIS benchmark PDF’s from the below link:  
 https://www.cisecurity.org/cis-benchmarks/
 
-Go to the `Operating Systems` section and search for the `Distribution Independent Linux`. Expand it to see more options then download CIS Benchmark.
+Go to the `Operating Systems` section and search for the `Distribution Independent Linux`  
+Expand it to see more options then download CIS Benchmark

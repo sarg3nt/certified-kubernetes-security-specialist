@@ -2,7 +2,7 @@
 
 In Linux Kernel < 2.2 there were two types of processes.  Privileged Processes and Unprivileged processes.  Privileged processes were those ran by UID 0, the root user and they could do anything, bypassing the kernel checks.  
 
-From Linux Kernel 2.2 onwards, the Privileged Process where broken up into a set of capabilities which can now be assigned to different applications.
+From Linux Kernel 2.2 onwards, the Privileged Process where broken up into a set of capabilities which can now be assigned to different applications
 
 To check what capabilities an application needs we use the `getcap` command
 ```sh
@@ -32,7 +32,7 @@ Output
 Capabilities for `2626': = cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_linux_immutable,cap_net_bind_service,cap_net_broadcast,cap_net_admin,cap_net_raw,cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_chroot,cap_sys_ptrace,cap_sys_pacct,cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_mknod,cap_lease,cap_audit_write,cap_audit_control,cap_setfcap,cap_mac_override,cap_mac_admin,cap_syslog,cap_wake_alarm,cap_block_suspend,cap_audit_read+ep
 ```
 
-Add capabilities using securityContext / capabilities / add
+Add capabilities using `securityContext`: `capabilities`: `add`
 ```yaml
 apiVersion: v1
 kind: Pod

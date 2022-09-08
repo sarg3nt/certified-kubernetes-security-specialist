@@ -1,7 +1,7 @@
 # Limit Node Access
 
-- It is best practice to limit the access to the nodes running Kubernetes.  
-  The nodes should not be accessible from the Internet.
+- It is best practice to limit the access to the nodes running Kubernetes  
+  The nodes should not be accessible from the Internet
 - Access nodes via VPN or via authorized networks in the infrastructure firewall
 - To mitigate internal threats only those that need access to the nodes should have it
 
@@ -42,13 +42,13 @@ Access control files are stored in `/etc`
 /etc/group
 ```
 
-We can use the above tools and directories to determine what a user has access to and change their access so they have the least privilege possible.
+We can use the above tools and directories to determine what a user has access to and change their access so they have the least privileges possible
 
 ```sh
 # Set user michael's shell to the nologin one so he can't log in
 usermod -s /bin/nologin michael
 
-# Check Michaels access
+# Check Michael's access
 grep -i michael /etc/passwd
 # michael:x:1001:1001::/home/michael:/bin/nologin
 

@@ -1,19 +1,19 @@
 # Falco
 
-
 ## Architecture
 
-1. Falco can use either a custom Falco Kernel module or the eBPF (extended Burkley Packet Filter).  Most cloud providers do not allow the installation of the Falco Kernel module but do allow eBPF
+1. Falco can use either a custom Falco Kernel module or the eBPF (extended Burkley Packet Filter)  
+Most cloud providers do not allow the installation of the Falco Kernel module but do allow eBPF
 1. The system calls are then analyzed by the SysDig libraries in User Space
 1. Events are then filtered by the Falco Policy Engine by making use of the pre-defined rules
-1. Events are then sent via the various output channels (email, etc)
+1. Events are then sent via the various output channels (local file, webhook, etc.)
 
 
 
 ## Installation
 
-**Method 1:** Install as a service directly oon the node  
-One advantage of installing Falco on the node as a service is that it is protected from container based attacks to a greater extent
+**Method 1:** Install as a service directly on the node, this is the recommended way  
+The advantage of installing Falco on the node as a service is that it is protected from container based attacks to a greater extent
 ```sh
 curl -s https://falco.org/repo/falcosecurity-3672BA8F.asc | apt-key add -
 echo "deb https://download.falco.org/packages/deb stable main" | tee -a /etc/apt/sources.list.d/falcosecurity.list
@@ -47,19 +47,19 @@ journalctl -fu falco
 kubectl exec -it nginx -- bash
 
 # On second shell, the logs will show 
-Notice A shell was spawned in a container with an attached terminal . . .
+# Notice A shell was spawned in a container with an attached terminal . . .
 
 # Inside the container on terminal 1
 cat /etc/shadow
 
 # Logs
-Warning Sensitive file opened for reading by non-trusted program
+# Warning Sensitive file opened for reading by non-trusted program
 ```
 
 ## Falco Rules
 
-rules.yaml
 ```yaml
+# rules.yaml
 - rule: <name of the rule>
   desc: <Detailed Description of the rule>
   condition: <When to filter events matching the rule>
@@ -97,13 +97,13 @@ For more on Sysdig filters see https://falco.org/docs/rules/supported-fields/
 
 Lists
 ```yaml
-# Above we called out bash, we can use a list instead  
+# Above we specified the bash shell, we can use a list instead  
 - list: linux_shells
   items: [bash,zsh,ksh,sh,csh]
 - rule: detect Shell inside a container
   desc: Alert if a shell such as bash is open inside the container
   condition: container.io !- host and proc.name in (linux_shells)
-  output: Bash Shell Opened (user=%user.name %container.id)
+  output: Shell Opened (user=%user.name %container.id)
   priority: WARNING
 ```
 
@@ -114,7 +114,7 @@ Macros.  There are several macros that can be used when writing customer rules b
 - rule: detect Shell inside a container
   desc: Alert if a shell such as bash is open inside the container
   condition: container and proc.name in (linux_shells)
-  output: Bash Shell Opened (user=%user.name %container.id)
+  output: Shell Opened (user=%user.name %container.id)
   priority: WARNING
 ```
 Macro List: https://falco.org/docs/rules/default-macros/
@@ -125,9 +125,9 @@ The main configuration file is at `/etc/falco/falco.yaml`
 This can be seen by viewing the service `systemctl status falco` or  
 by viewing the falco logs `journalctl -u falco | grep configuration file`
 
-/etc/falco/falco.yaml
 ```yaml
-# Rule order matters, later rules files with the same rule will override earlier ones
+# /etc/falco/falco.yaml
+# Rule order matters, later rule files with the same rule name will override earlier ones
 rules_file:
  - /etc/falco/falco_rules.yaml
  - /etc/falco/falco_rules.local.yaml
@@ -172,8 +172,8 @@ Reference Docs for configuration: https://falco.org/docs/configuration/
 
 ### Rules
 
-The `/etc/falco/falco_rules.yaml` file is where the main rule set is, it should not be modified as modifications will be overwritten when Falco is updated.  
-If you'd like to modify a default rule make a copy of it to the the `/etc/falco/falco_rules.local.yaml` file.  
+The `/etc/falco/falco_rules.yaml` file is where the main rule set is, it should not be modified as modifications will be overwritten when Falco is updated  
+If you'd like to modify a default rule make a copy of it to the the `/etc/falco/falco_rules.local.yaml` file  
 Store new custom rules in the same file `/etc/falco/falco_rules.local.yaml`
 
 Once rules are edited or added we need to restart the Falco engine  
@@ -182,9 +182,7 @@ To Hot Reload the Falco configuration without restarting the Falco service we ca
 ```sh
 kill -1 $(cat /var/run/falco.pid)
 ```
-## Reference links
-
-Below are some references:
+## References
 
 - https://falco.org/docs/getting-started/installation/
 - https://github.com/falcosecurity/charts/tree/master/falco

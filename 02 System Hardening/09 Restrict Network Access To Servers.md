@@ -5,14 +5,12 @@
 
 # UFW Uncomplicated Firewall
 
-The internal tools is called `netfiler`  
+The internal tool is called `netfiler`  
 `iptables` is one of the most common interfaces to `netfilter` but it has a steep learning curve  
-`ufw` is another interface to `netfilter`
+`ufw` is another interface to `netfilter` that many find much easier
 
+## Install UFW
 ```sh
-# See what ports are open
-netstat -an | grep -w LISTEN
-
 apt-get update
 apt-get install ufw
 systemctl enable ufw
@@ -20,6 +18,12 @@ systemctl start ufw
 
 ufw status
 # Status: inactive
+```
+
+## Using UFW
+```sh
+# See what ports are open
+netstat -an | grep -w LISTEN
 
 # we want to allow 22 and 80 from two IPs
 # First allow all default outgoing connections and block incoming.  These rules will not take immediate effect because ufw is currently disabled.
@@ -39,7 +43,9 @@ ufw allow 80
 
 # Now block the port 8080 we don't want used
 # This is not really needed as we have already blocked all incoming but is OK to create
-# Allow a range of ports
+ufw deny 8080 proto tcp
+
+# deny a range of ports
 ufw deny 1000:15000 proto tcp
 
 # Reset rules to default

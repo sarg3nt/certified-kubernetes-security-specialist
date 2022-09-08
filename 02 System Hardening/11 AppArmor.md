@@ -1,10 +1,10 @@
 # AppArmor
 
-Instructions can be found in the k8s docus by searching for `apparmor`
+Instructions can be found in the k8s docs by searching for `apparmor`
 
-Used to further restrict an applications capabilities to further reduce the attack surface of a threat.
+Used to restrict an applications capabilities to further reduce the attack surface of a threat
 
-Where seccomp can restrict a programs access to system calls, it cannot restrict access to other objects such as a file or directory
+Where `seccomp` restricts a programs access to system calls, it cannot restrict access to other objects such as a file or directory
 
 AppArmor is a linux security module which is used to restrict a program to a limited set of resources
 
@@ -22,7 +22,7 @@ Result
 Y
 ```
 AppArmor uses profiles that must be loaded into the kernel  
-We can check if the exist with  
+We can check if they exist with  
 ```sh
 cat /sys/kernel/security/apparmor/profiles
 ```
@@ -30,7 +30,7 @@ cat /sys/kernel/security/apparmor/profiles
 Example AppArmor profile:
 ```text
 profile apparmor-deny-write flags-(attach_disconnected) {
-  # Allow file system, allow complete access to the entire file system
+  # "file," Allows complete access to the entire file system
   file,
   # Deny all file writes to the entire file system
   deny /** w,
@@ -66,9 +66,9 @@ apparmor module is loaded.
 0 processes are unconfined but have a profile defined.
 ```
 Profiles can be loaded in three different modes.
-- enforce: Monitors and enforces the rules
-- complain: Will allow the app to perform any tasks but logs them
-- unconfined: Perform any tasks and does not log
+- `enforce`: Monitors and enforces the rules
+- `complain`: Will allow the app to perform any tasks but logs them
+- `unconfined`: Perform any tasks and does not log
 
 ## Creating AppArmor Profiles
 
@@ -89,9 +89,10 @@ apt-get install -y apparmor-utils
 
 We can now use the `aa-genprof` tool to create the profile
 ```sh
-aa-genprof /root/add_data.sh # must use absolute path to script.
+aa-genprof /root/add_data.sh # must use absolute path to script
 ```
 From a separate shell we must now run the bash script  
+
 You will now be asked a series of permissions to determine what should be allowed and denied  
 
 We can then view the created profile here  
@@ -113,10 +114,10 @@ ln -s /etc/apparmor.d/root.add_data.sh /etc/apparmor.d/disable/
 
 ## AppArmor in Kubernetes
 
-AppArmor was added in k8 1.4 but is still in beta as of 1.20
+AppArmor was added in kubernetes 1.4 but is still in beta as of 1.20
 
 Requirements
-- AppArmor kernel module must be enabled on all the nodes that pods will run
+- AppArmor kernel module must be enabled on all the nodes that pods will run on
 - AppArmor profile must be loaded on all the nodes
 - Container runtime must support AppArmor (most support it, docker, containerd, etc.)
   

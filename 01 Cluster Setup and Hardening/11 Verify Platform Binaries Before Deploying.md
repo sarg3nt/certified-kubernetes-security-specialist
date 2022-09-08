@@ -1,14 +1,12 @@
 # Verify Platform Binaries Before Deploying
 
-When downloading kubernetes manually we must compare our downloaded file's hash to that listed on the Kubernetes Release Notes page.
+When downloading kubernetes manually we must compare our downloaded file's hash to that listed on the Kubernetes Release Notes page
 
 ```sh
 shasum -a 512 kubernetes.tar.gz # mac
 sha512sum kubernetes.tar.gz # linux
 ```
 
-## Reference links
-
-Release Notes:  
+## References
 
 https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG

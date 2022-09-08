@@ -1,5 +1,6 @@
 # Privilege Escalation
 
+Use `sudo` for tasks require root privileges
 ```sh
 # use sudo
 sudo apt install nginx
@@ -28,6 +29,6 @@ sarah localhost=/usr/bin/shutdown -r now
 Fields for above
 
 1. User or %group
-2. Hosts, localhost, ALL(default), almost always ALL
-3. User, (ALL:ALL), user and group, almost always (ALL:ALL)
-4. Command, All(default) or list of commands '/bin/ls'
+2. Hosts: localhost, ALL(default), almost always ALL
+3. (User:Group): Almost always (ALL:ALL), optional
+4. Command: ALL(default) or list of commands '/bin/ls'

@@ -1,8 +1,6 @@
-# OPA
+# Open Policy Agent
 
-Open Policy Agent
-
-OPA takes care of Authorization, not Authentication
+OPA takes care of Authorization, not Authentication but is also often used as a back end service for Admissions Controllers
 
 The exam won't have us write policy files but we should know how to work with them and what they do.
 
@@ -22,6 +20,7 @@ Note: By default authentication and authorization are disabled.
 An example OPA rule in the Rego policy language
 example.rego
 ```sh
+# example.rego
 package httpapi.authz
 
 # HTTP API request
@@ -65,10 +64,10 @@ def hello_world():
 
 ## Videos to Watch to Learn More about OPA
 
-How Netflix Is Solving Authorization Across Their Cloud [I] - Manish Mehta & Torin Sandall, Netflix
+How Netflix Is Solving Authorization Across Their Cloud - Manish Mehta & Torin Sandall, Netflix  
 https://www.youtube.com/watch?v=R6tUNpRpdnY
 
-OPA Deep Dive
+OPA Deep Dive  
 https://www.youtube.com/watch?v=4mBJSIhs2xQ
 
 # OPA in Kubernetes
@@ -125,9 +124,9 @@ Example data coming in for a pod creation
 }
 ```
 
-Validating against this policy
-kubernetes.rego
+Validating against this policy  
 ```js
+// kubernetes.rego
 package kubernetes.admission
 
 deny[msg] {
@@ -163,7 +162,8 @@ data:
     }
 ```
 
-When we install OPA into Kubernetes a sidecar called `kube-mgmt` is created in the OPA pod.  This side car loads Kubernetes objects so OPA knows what resources are deployed.  It also loads ConfigMap policies into OPA that have labels of `openpolicyagent.org/policy: rego`
+When we install OPA into Kubernetes a sidecar called `kube-mgmt` is created in the OPA pod  
+This side car loads Kubernetes objects so OPA knows what resources are deployed, it also loads `ConfigMap` policies into OPA that have labels of `openpolicyagent.org/policy: rego` as shown in the above example
 
 ## References
 

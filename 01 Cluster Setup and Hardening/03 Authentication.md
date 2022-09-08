@@ -6,15 +6,15 @@ Types of users include:
 - Application end users
 - Bots / Machines
 
-Here we will talk about users accessing the cluster, not the end user applications.  
-We have two types of users, humans and bots.  
+Here we will talk about users accessing the cluster, not the end user applications    
+We have two types of users, humans and bots  
 
-Kubernetes does not manage "Human" end users, it relies on other authentication mechanisms such as LDAP.  
+Kubernetes does not manage "Human" end users, it relies on other authentication mechanisms such as LDAP  
 Kubernetes can manage bot accounts using "Service Accounts"  
 
 The `kube-apiserver` manages all access to the Kubernetes cluster weather it be via `kubectl` or the API directly.
 
-The `kube-apiserver` supports the following authentication mechanisms.
+The `kube-apiserver` supports the following authentication mechanisms
 
 - Static Password File
 - Static Token File
@@ -22,6 +22,10 @@ The `kube-apiserver` supports the following authentication mechanisms.
 - Identity Service
 
 ## Basic Auth Mechanisms - Files
+
+### Warning
+
+These are not a recommended methods as tokens and passwords are stored in clear text files
 
 ### Static Password File
 
@@ -31,7 +35,7 @@ A file like `user-details.csv` is generated.
 # user-details.csv
 password1,username1,userid2
 password2,username2,userid2
-etc.
+...
 ```
 We then pass this file as an option to the `kube-apiserver`  
 `--basic-auth-file=user-details.csv`
@@ -40,31 +44,32 @@ To then authenticate the API server with basic credentials, specify the user in 
 
 `curl -v -k https://master-node-ip:6443/api/v1/pods -u "user1:password1"`
 
-The above `csv` file can optionally have a group column to assign users to groups.
+The above `csv` file can optionally have a group column to assign users to groups
 
 ### Static Token File
 
-Instead of passwords, you can specify a token.
+Instead of passwords, you can specify a token
 
 ```csv
 # user-token-details.csv
-fk4kslv9ckdlekjkcvx00v9dlsdkfls8vosk,username1,userid2
+fk4kslv9ckdlekjkcvx00v9dlsdkfls8vosk,username1,userid1
 zvk4lc9lfnj4ffldc9bjklemcleedl3j50jf,username2,userid2
-etc.
+...
+```
+Then in the `kube-apiserver` config add:  
+```yaml
+- --token-auth-file=user-token-details.csv
+```
+Reminder: Any file access done in the a pod needs to be backed by a volume to the source on the node.
+
+When authenticating, specify the token as an Authorization Bearer Token:  
+```sh
+curl -v -k https://master-node-ip:6443/api/v1/pods --header "Authorization: Bearer fk4kslv9ckdlekjkcvx00v9dlsdkfls8vosk"
 ```
 
-Then in the `kube-apiserver` config add:  
-`--token-auth-file=user-token-details.csv`
-
-When authenticating,s specify the token as an Authorization Bearer Token:  
-`curl -v -k https://master-node-ip:6443/api/v1/pods --header "Authorization: Bearer fk4kslv9ckdlekjkcvx00v9dlsdkfls8vosk"`
-
-## Note
-
-This is not a recommended method as tokens and passwords are stored in clear text files.
-
 # Article on Setting up Basic Authentication
-This is a direct copy from the training.
+
+**This is a direct copy from the training and is deprecated as of 1.19, here for historic purposes only**
 
 Setup basic authentication on Kubernetes (Deprecated in 1.19)  
 Note: This is not recommended in a production environment. 

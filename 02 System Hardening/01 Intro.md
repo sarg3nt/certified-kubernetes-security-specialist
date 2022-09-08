@@ -1,6 +1,6 @@
 # Least Privilege Principle
 
-Users and components should have only the access they require to do their job.
+Users and components should have only the access they require to do their job
 
 # Reduce the Attack Surface
 

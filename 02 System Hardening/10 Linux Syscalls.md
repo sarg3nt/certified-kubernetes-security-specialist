@@ -1,24 +1,26 @@
 # Linux `syscalls` and `seccomp`
 
-**Exam Tip:** The exam will probably not ask us to create a seccomp profile by hand but it probably weill ask us to copy an existing seccomp profile to the correct directory and use it in pods.
+**Exam Tip:** The exam will probably not ask us to create a `seccomp` profile by hand but it probably weill ask us to copy an existing `seccomp` profile to the correct directory and use it in pods
 
-All seccomp related documentation can be found in the kubernetes docs by searching for `seccomp` which will lease here: https://kubernetes.io/docs/tutorials/security/seccomp/
+All `seccomp` related documentation can be found in the kubernetes docs by searching for `seccomp` which will lead here: https://kubernetes.io/docs/tutorials/security/seccomp/
 
-System Calls consist of communication between user space where applications are run and Kernel Space.
+System Calls consist of communication between user space where applications are run and kernel space
 
 Examples of system calls are open(), close(), execve(), readdir(), strlen(), closedir(), etc.
 
 ## `strace`
 
-Determine what syscalls an application uses with `strace`
+Determine what `syscalls` an application uses with `strace`
 
 ```sh
 # strace is a tool used to trace system calls by an application
 /usr/bin/strace
 
+# Simply add strace to the beginning of a command
 # This provides a lot of detail
 strace touch /tmp/error.log
 # execve("/usr/bin/touch", ["touch", "/tmp/error.log"], 0x7ffdb5aef278 /* 40 vars */) = 0
+# ...
 
 # to trace a running process we need the pid
 pidof etcd
@@ -27,7 +29,7 @@ pidof etcd
 # Now use that pid to attach to the process with strace
 strace -p 3596
 
-# to see all syscals
+# -c or --summary-only will provide a summary
 strace -c touch /tmp/error.log
 ```
 Results
@@ -56,7 +58,8 @@ Results
 
 Used to trace system calls on containers
 
-Tracee can be installed in the OS but it is often easier to run it as a Docker container.
+Tracee can be installed in the OS but it is often easier to run it as a Docker container  
+The Tracee container needs some volumes, privileged and host pid.  Memorize this
 
 ```sh
 # To trace "command" of "ls"
@@ -83,11 +86,11 @@ docker run --name tracee --rm --privileged --pid=host \
 
 ## Restrict `syscalls` with `seccomp`
 
-There are about 435 syscalls in Linux and all can be used by applications, however in reality, no application will need to make this many syscalls.  Having access to these syscalls can increase attack service.
+There are about 435 syscalls in Linux and all can be used by applications, however in reality, no application will need to make this many syscalls.  Having access to these syscalls increases attack service
 
-In 2016 the Dirty Cow vulnerability used ptrace to write to a read only file, gain access to root and break out of the container
+In 2016 the Dirty Cow vulnerability used `ptrace` to write to a read only file, gain access to root and break out of the container
 
-seccomp can be used to restrict syscalls.
+`seccomp` can be used to restrict syscalls
 
 Check if seccomp is installed
 ```sh
@@ -113,7 +116,7 @@ ps -ef
 ```
 results
 ```text
-UID        PID  PPID  C STIME TTY          TIME CMD
+UID        PID  PPID  C STIME TTY      TIME CMD
 root         1     0  0 18:38 pts/0    00:00:00 /bin/sh
 root         8     1  0 18:38 pts/0    00:00:00 ps -ef
 ```
@@ -220,7 +223,7 @@ spec:
   restartPolicy: Never
 ```
 
-View the logs on the node at /var/log/syhslog
+View the logs on the node at /var/log/syslog
 ```sh
 sudo grep syscall /var/log/syslog
 ```

@@ -7,8 +7,8 @@
 
 We need an Admission Webhook Server
 
-/etc/kubernetes/admission-config.yaml
 ```yaml
+# /etc/kubernetes/admission-config.yaml
 apiVersion: apiserver.config.k8s.io/v1
 kind: AdmissionConfiguration
 plugins:
@@ -41,3 +41,4 @@ Make sure you do not accidentally create two config entries for --enable-admissi
 - --enable-admission-plugins=ImagePolicyWebhook
 - --admission-control-config-file=/etc/kubernetes/admission-config.yaml
 ```
+**Reminder:** Any config in a pod that is pointing to a file needs to have a volume mounted to the host OS if that is where the config is located

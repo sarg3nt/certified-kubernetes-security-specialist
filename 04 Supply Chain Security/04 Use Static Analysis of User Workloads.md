@@ -1,10 +1,10 @@
 # Use Static Analysis of User Workloads
 
-## kubesec
+## `kubesec`
 
 https://kubesec.io/
 
-`kubesec` accepts one or more manifest files and scans them for issues.  
+`kubesec` accepts one or more manifest files and scans them for issues  
 Example Output:  
 ```json
 [
@@ -53,6 +53,8 @@ sudo mv kubesec /usr/local/bin
 Command line usage  
 ```sh
 kubesec scan k8s-deployment.yaml
+# or
+k get po grid-main-7bfb769655-2549s -o yaml | kubesec scan /dev/stdin | jq
 ```
 Docker Usage
 ```sh

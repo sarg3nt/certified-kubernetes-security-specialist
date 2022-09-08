@@ -24,4 +24,4 @@ This refers to the whole infrastructure itself, regardless of if it is the "clou
 
 ## Code
 
-Code security best practices.  Mostly out of scope to this scope but we do cover some k8s specific topics.
+Code security best practices.  Mostly out of scope for this training but we do cover some k8s specific topics.

@@ -18,8 +18,7 @@ dockerd --debug
 # this allows internal communication only, which is the default
 # To add external access to the Docker daemon, port 2375 is the standard Docker port
 dockerd --debug --host=tcp://192.168.1.10:2375
-
-# We could not talk to this Docker host remotely by setting the env var
+# We could now talk to this Docker host remotely by setting the env var
 export DOCKER_HOST="tcp://192.168.1.10:2375"
 # NOTE: There is a reason this is disabled by default as it is very insecure, no encryption or authentication
 # Never do this on a publicly available host
@@ -54,10 +53,10 @@ What are the problems with someone gaining access to Docker
 - Can run their own containers (bit coin mining, attack tools)
 - Can gain root access to the host system itself by running a privileged container
 
-Best practice is to not expose the Docker Daemon to the outside world at all, which is the default, however we may run into a situation where it is necessary to expose docker over TCP, here are some things that should be done to protect it.
+Best practice is to not expose the Docker Daemon to the outside world at all, which is the default, however we may run into a situation where it is necessary to expose docker over TCP, here are some things that should be done to protect it
 
 - Only expose on an interface that is part of your private network, i.e. not on public interfaces.
-- Secure communication with TLS certs.  See config in earlier sections.
+- Secure communication with TLS certs.  See config in earlier sections
 - Enable Authentication
 
 ## Enable Encryption
@@ -77,7 +76,7 @@ Create a Certificate pair and use it for encryption.
 
 ### Docker Client
 
-Set vars to point at the correct location and turn on tls
+Set vars to point at the correct location and turn on TLS
 
 ```sh
 export DOCKER_HOST="tcp://192.168.1.10:2376"
@@ -103,7 +102,7 @@ Copy the CA cert to the Docker server and configure the daemon to use it
   "tlscert": "/var/docker/server.pem",
   "tlskey": "/var/docker/serverkey.pem",
   "tlsverify": true, // This enables authentication
-  "tlscacert": "/var/docker/caserver.pem" // Docker will use this ca cert to verify those that connect.
+  "tlscacert": "/var/docker/caserver.pem" // Docker will use this ca cert to verify those that connect
 }
 ```
 

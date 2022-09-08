@@ -48,4 +48,4 @@ To enable auditing we have to pass the following commands into the `kube-apiserv
 - --audit-log-maxbackup=5 # number of files to retain on the host
 - --audit-log-maxsize=100 # Max size of file in megabytes before being rotated
 ```
-**NOTE:** Don't forget that when pointing to file locations as we do above that you must mount those paths as volumes
+**NOTE:** Don't forget that when pointing to file locations as we do above that you must mount those paths as volumes if the source files are on the host

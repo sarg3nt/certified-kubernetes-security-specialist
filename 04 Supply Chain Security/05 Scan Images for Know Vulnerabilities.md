@@ -3,7 +3,8 @@
 ## What is a CVE
 
 Common Vulnerabilities and Exposures (CVE)  
-A central database that anyone can submit vulnerabilities and exposures to.  Each CVE gets a unique identifier.
+A central database that anyone can submit vulnerabilities and exposures to  
+Each CVE gets a unique identifier
 
 What kind of bugs get CVEs?  Usually one of the following: 
 - Anything that lets an attacker bypass security and do something they should not be able to
@@ -24,7 +25,7 @@ Once we've identified a vulnerability we can mitigate it in one of the following
 
 - Upgrade the component if a new version fixes it
 - Uninstall the component if we do not need it
-- Apply some mitigating or compensating control if one exists
+- Apply some mitigating or compensating control if they exist
 
 ## Vulnerability Scanner Trivy
 
@@ -56,6 +57,6 @@ trivy image --format json --output /location/file nginx
 
 - Continuously rescan images
 - Kubernetes Admission Controllers to scan images OR
-- Have our own repository with pre-scanned images ready to go
+- Use a private repository with pre-scanned images ready to go
 - Integrate scanning into CI/CD pipeline
 

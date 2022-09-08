@@ -1,7 +1,8 @@
 # Restrict Kernel Modules
 
-The Linux kernel has a modular design which allows it to dynamically load kernel modules, such as adding device drivers for video cards.  
-Modules can also be added manually.
+The Linux kernel has a modular design which allows it to dynamically load kernel modules, such as adding device drivers for video cards  
+
+Modules can also be added manually
 
 ```sh
 # Add a module manually
@@ -27,4 +28,3 @@ blacklist dccp
 
 # Refer to section 3.4 for more uncommon network protocols that can be blacklisted
 ```
-

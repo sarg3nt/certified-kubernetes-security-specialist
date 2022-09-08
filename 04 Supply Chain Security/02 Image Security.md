@@ -6,12 +6,12 @@ image: nginx
 ```
 really looks like this  
 ```yaml
-image: docker.io/library/nginx
-     # registry, user/, image/
+image: docker.io/library/nginx:latest
+     # registry, user/, image/: version
      #          account  repository
 ```
 
-Use a private registry that is private and accessed from a set of credentials  
+Use a private registry that is local and accessed from a set of credentials  
 
 We need to create a `docker-registry` secret that has the server url, user, password and email needed for Docker to pull the image
 ```sh
@@ -34,4 +34,4 @@ spec:
 imagePullSecrets:
 - name: regcred
 ```
-The kubelet on the node uses the secret to pull the images
+The `kubelet` on the node uses the secret to pull the image
