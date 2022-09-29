@@ -7,6 +7,7 @@ Types of users include:
 - Bots / Machines
 
 Here we will talk about users accessing the cluster, not the end user applications    
+
 We have two types of users, humans and bots  
 
 Kubernetes does not manage "Human" end users, it relies on other authentication mechanisms such as LDAP  
@@ -25,7 +26,7 @@ The `kube-apiserver` supports the following authentication mechanisms
 
 ### Warning
 
-These are not a recommended methods as tokens and passwords are stored in clear text files
+These are not a recommended method as tokens and passwords are stored in clear text files
 
 ### Static Password File
 
@@ -60,7 +61,7 @@ Then in the `kube-apiserver` config add:
 ```yaml
 - --token-auth-file=user-token-details.csv
 ```
-Reminder: Any file access done in the a pod needs to be backed by a volume to the source on the node.
+Reminder: Any file access done in a pod needs to be backed by a volume to the source on the node.
 
 When authenticating, specify the token as an Authorization Bearer Token:  
 ```sh

@@ -99,8 +99,10 @@ Copy the CA cert to the Docker server and configure the daemon to use it
 {
   "hosts": ["tcp://192.168.1.10:2376"],
   "tls": true,
+  // encryption
   "tlscert": "/var/docker/server.pem",
   "tlskey": "/var/docker/serverkey.pem",
+  // authentication via a cert
   "tlsverify": true, // This enables authentication
   "tlscacert": "/var/docker/caserver.pem" // Docker will use this ca cert to verify those that connect
 }
@@ -108,7 +110,7 @@ Copy the CA cert to the Docker server and configure the daemon to use it
 
 ### Client
 
-Create a certificate pare using the same CA the server is using and copy them to the client along with the CA cert
+Create a certificate pair using the same CA the server is using and copy them to the client along with the CA cert
 
 ```sh
 export DOCKER_HOST="tcp://192.168.1.10:2376"

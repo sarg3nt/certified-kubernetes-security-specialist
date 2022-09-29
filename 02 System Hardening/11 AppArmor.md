@@ -48,7 +48,6 @@ apparmor module is loaded.
 20 profiles are in enforce mode.
    /sbin/dhclient
    /snap/core/13425/usr/lib/snapd/snap-confine
-   /snap/core/13425/usr/lib/snapd/snap-confine//
    <truncated>
 1 profiles are in complain mode.
    /usr/sbin/sssd

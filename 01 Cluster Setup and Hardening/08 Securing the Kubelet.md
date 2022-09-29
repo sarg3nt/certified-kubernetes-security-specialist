@@ -5,9 +5,9 @@ The `kubelet` is like the captain on the ship.  He does all the work and reports
 ## `kubelet` Settings
 
 `kubeadm` does not install the `kubelet` service but it can help with configuring    
-In versions of Kubernetes older than 1.10 all of the `kubelet` config was done in the `kubelet` start command but as of 1.10 many of those options were moved to the `kubelet-config.yaml` file and `kubeadm` helps configure that file when you run the `kubeadm join` command
+In versions of Kubernetes older than 1.10 all of the `kubelet` config was done in the `kubelet` start command but as of 1.10 many of those options were moved to the `/var/lib/kubelet/config.yaml` file and `kubeadm` helps configure that file when you run the `kubeadm join` command
 
-Note: Although configuration can be set in either the kubelet service config or in the `kubelet-config.yaml` file it is highly recommended that the `kubelet-config.yaml` file is used.
+Note: Although configuration can be set in either the kubelet service config or in the `/var/lib/kubelet/config.yaml` file it is highly recommended that the `/var/lib/kubelet/config.yaml` file is used.
 
 To know what options the `kubelet` was started with we can inspect the kubelet process on the node
 ```sh  
@@ -30,7 +30,7 @@ To disable anonymous access set
 # /etc/systemd/system/kubelet.service
 --anonymous-auth=false
 ```  
-in the `kubelet` service configuration file or the external `kubelet-config.yaml`  
+in the `kubelet` service configuration file or the external `/var/lib/kubelet/config.yaml`  
 ```yaml
 authentication:
   anonymous:
@@ -46,10 +46,10 @@ The recommended method is to use Certificate based authentication by setting the
 # /etc/systemd/system/kubelet.service
 --client-ca-file=/path/to/ca.crt
 ```
- in the kubelet service config or the external `kubelet-config.yaml`
+ in the kubelet service config or the external `/var/lib/kubelet/config.yaml`
 ```yaml
 authentication:
-  x50:
+  x509:
     clientCAFile: /path/to/ca.crt
 ```
 
@@ -74,14 +74,14 @@ The default authorization mode is `AlwaysAllow`, to prevent this we set the auth
 ```
 ```yaml
 # kubelet-config.yaml
-authentication:
+authorization:
   mode: Webhook
 ```
 In this mode the kubelet sends a request to the `kube-apiserver` to see if it should approve or reject the request.
 
 ### Metrics Server
 
-The metrics server usually runs on port 10255 and is `read allow` by all.  To disable this set the port to 0.  If the `kubelet` was configured by `kubeadm` then the port will be set to 0 in the `kubelet-config.yaml` file:  
+The metrics server usually runs on port 10255 and is `read allow` by all.  To disable this set the port to 0.  If the `kubelet` was configured by `kubeadm` then the port will be set to 0 in the `/var/lib/kubelet/config.yaml` file:  
 ```yaml
 # kubelet-config.yaml
 readOnlyPort: 0
