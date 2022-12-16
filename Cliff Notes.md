@@ -1,4 +1,5 @@
 # Cliff Notes
+[[11 AppArmor]]
 
 This page will attempt to distill the training down to a single, consumable file to ease memorization
 
@@ -80,6 +81,7 @@ blacklist sctp
 ## Disable Open Ports
 ```sh
 # Check if port is open and listening
+# -a is all, -n is numeric
 netstat -an | grep -w LISTEN
 # On Ubuntu check what ports are used by what services
 cat /etc/services | grep -w 53
@@ -89,6 +91,7 @@ cat /etc/services | grep -w 53
 ##  Using UFW
 ```sh
 # See what ports are open
+# -a is all, -n is numeric
 netstat -an | grep -w LISTEN
 
 # we want to allow 22 and 80 from two IPs
@@ -133,7 +136,7 @@ ufw delete 5
 ## Linux `syscalls` and `seccomp`
 ### Determine what `syscalls` an application uses with `strace`
 ```sh
- strace touch /tmp/error.log
+strace touch /tmp/error.log
 # execve("/usr/bin/touch", ["touch", "/tmp/error.log"], 0x7ffdb5aef278 /* 40 vars */) = 0
 
 # to trace a running process we need the pid
@@ -464,7 +467,9 @@ The following is a blacklist profile becuase its default action is to allow ever
 }
 ```
 ## AppArmor
+
 Instructions can be found in the k8s docs by searching for `apparmor`
+
 Where `seccomp` restricts a programs access to system calls, it cannot restrict access to other objects such as a file or directory  
 AppArmor is a linux security module which is used to restrict a program to a limited set of resources  
 Check if AppArmor is installed:
@@ -825,7 +830,8 @@ data:
 When we install OPA into Kubernetes a sidecar called `kube-mgmt` is created in the OPA pod  
 This side car loads Kubernetes objects so OPA knows what resources are deployed, it also loads `ConfigMap` policies into OPA that have labels of `openpolicyagent.org/policy: rego` as shown in the above example
 
-## Container Sandboxing with gVisor
+## Container Sandboxing
+### Container Sandboxing with gVisor
 
 gVisor improves container isolation by inserting itself between the container and the kernel so syscalls go through gVisor
 
@@ -847,7 +853,7 @@ Disadvantages of gVisor
 
 Whereas Docker uses `runC` as the base runtime, gVisor uses the `runsc` runtime to start containers
 
-## Container Sandboxing with Kata Containers
+### Container Sandboxing with Kata Containers
 
 Kata inserts each container into it's own light weight VM  
 This does add some latency and increases resource usage  
