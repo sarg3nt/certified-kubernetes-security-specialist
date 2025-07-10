@@ -37,6 +37,18 @@ titles_from_headings:
   strip_title: true
   collections: false
 
+# Default values for all pages
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
 # Include patterns
 include:
   - "_*_.html"
@@ -51,3 +63,9 @@ exclude:
   - ".git*"
   - "Gemfile*"
   - "vendor"
+
+# Kramdown configuration
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
