@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Certified Kubernetes Security Spec- [05 Scan Images for Known Vulnerabilities](04%20Supply%20Chain%20Security/05%20Scan%20Images%20for%20Known%20Vulnerabilities)alist Training Notes"
+title: "Certified Kubernetes Security Specialist Training Notes"
 ---
 
 # Certified Kubernetes Security Specialist Training Notes
