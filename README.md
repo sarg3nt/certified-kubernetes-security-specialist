@@ -8,7 +8,7 @@ These notes are not meant to be a complete record of the training but to be used
 
 ### Quick Reference
 - [Cliff Notes](Cliff%20Notes.md)
-- [The 4C's of Cloud Native Security](The%204C's%20of%20Cloud%20Native%20security.md)
+- [The 4C's of Cloud Native Security](The%204C%E2%80%99s%20of%20Cloud%20Native%20security.md)
 
 ### 01 - Cluster Setup and Hardening
 - [01 CIS Benchmarks](01%20Cluster%20Setup%20and%20Hardening/01%20CIS%20Benchmarks.md)
