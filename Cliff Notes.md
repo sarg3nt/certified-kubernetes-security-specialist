@@ -366,7 +366,7 @@ spec:
       allowPrivilegeEscalation: false
   restartPolicy: Never
 ```
-When looking at the above pod we will see a STATUS of either Error or ContainerCannotRun
+When looking at the above pod we will see a STATUS of either Error or ContainerCannotRun.
 
 Example detailed whitelist seccomp profile  
 This is a whitelist profile because its default action is to block everything with `SCMP_ACT_ERRNO` then whielist what we need.  
@@ -470,7 +470,7 @@ The following is a blacklist profile becuase its default action is to allow ever
 
 Instructions can be found in the k8s docs by searching for `apparmor`
 
-Where `seccomp` restricts a programs access to system calls, it cannot restrict access to other objects such as a file or directory  
+Where `seccomp` restricts a programs access to system calls, it cannot restrict access to other objects such as a file or directory.
 AppArmor is a linux security module which is used to restrict a program to a limited set of resources  
 Check if AppArmor is installed:
 ```sh
@@ -662,9 +662,9 @@ The `NamespaceLifecycle` admission controller will make sure that requests to a 
 
 ### Creating our Own ACs
 
-To facilitate the creation of custom ACs there are two built in ACs called `MutatingAdmissionsWebhook` and `ValidatingAdmissionWebhook`
+To facilitate the creation of custom ACs there are two built in ACs called `MutatingAdmissionsWebhook` and `ValidatingAdmissionWebhook`.
 
-Webhook processing takes place after all the other built in ACs  
+Webhook processing takes place after all the other built in ACs.
 
 #### Develop and Deploy a Webhook Service  
 
@@ -845,17 +845,17 @@ gVisor has two components
 - Gofer: A file proxy which impplements components needed for containers to talk to the file system
 - gVisor has its own networking stack so the container does not need to interact with the host network
 
-Each container has its own gVisor which isolates the containers from each other
+Each container has its own gVisor which isolates the containers from each other.
 
 Disadvantages of gVisor
 - Not all apps work with gVisor
-- Increases latency as there is more for the CPU to do
+- Increases latency as there is more for the CPU to do.
 
 Whereas Docker uses `runC` as the base runtime, gVisor uses the `runsc` runtime to start containers
 
 ### Container Sandboxing with Kata Containers
 
-Kata inserts each container into it's own light weight VM  
+Kata inserts each container into its own lightweight VM  
 This does add some latency and increases resource usage  
 Many cloud providers do not support Kata as it requires nested virtualization which is usually very poor  
 Works well for bare metal servers
@@ -1052,7 +1052,7 @@ cat /etc/shadow
 
 In the above, the `container.name` and `proc.name` are Sysdig Filters  
 
-Other common filters
+Other common filters:
 - `fd.name`  Name of file descriptor.  To match events against a specific file
 - `evt.type` Used to filter system calls by name
 - `user.name` User tht took the action
@@ -1083,7 +1083,7 @@ Lists
   priority: WARNING
 ```
 
-Macros.  There are several macros that can be used when writing customer rules but we can also create our own
+Macros. There are several macros that can be used when writing customer rules but we can also create our own.
 ```yaml
 - macro: container
   condition: container.id != host
@@ -1219,7 +1219,7 @@ The `kube-apiserver` handles auditing out of the box but it is not enabled by de
 1. RequestReceived: After receive before any work
 1. ResponseStarted: Applicable to long running tasks like `watch`
 1. ResponseComplete: When all requested data is sent
-1. Panic: If there was an error
+1. Panic: If there was an error.
 
 We can manage what is recorded with audit policies
 audit-policy.yaml

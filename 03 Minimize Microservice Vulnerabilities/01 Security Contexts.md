@@ -1,7 +1,7 @@
 # Security Contexts
 
-We can choose to configure k8s security levels at either the pod or container level  
-Container level security overrides pod level
+We can choose to configure k8s security levels at either the pod or container level.
+Container level security overrides pod level.
 
 Pod level
 ```yaml
@@ -17,7 +17,7 @@ spec:
     image: ubuntu
     command: ["sleep","3600"]
 ```
-Container level, just move the whole thing inside of the containers section
+Container level, just move the whole thing inside of the containers section:
 ```yaml
 apiVersion: v1
 kind: Pod

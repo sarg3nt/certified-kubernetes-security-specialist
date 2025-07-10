@@ -1,23 +1,23 @@
 # Open Policy Agent
 
-OPA takes care of Authorization, not Authentication but is also often used as a back end service for Admissions Controllers
+OPA takes care of Authorization, not Authentication but is also often used as a back end service for Admissions Controllers.
 
 The exam won't have us write policy files but we should know how to work with them and what they do.
 
-Install OPA
+Install OPA:
 ```bash
 curl -L -o opa https://github.com/open-policy-agent/opa/releases/download/v0.11.0/opa_linux_amd64
 chmod 755 ./opa
 ./opa run -s
 ```
-Output
+Output:
 ```text
 {"addrs":[":8181"],"insecure_addr":"","level":"info","msg":"First line of log 
 stream.","time":"2021-03-18T20:25:38+08:00"}
 ```
 Note: By default authentication and authorization are disabled.
 
-An example OPA rule in the Rego policy language
+An example OPA rule in the Rego policy language:
 example.rego
 ```sh
 # example.rego
@@ -39,7 +39,7 @@ curl -X PUT --data-binary @example.rego http://localhost:8181/v1/policies/exampl
 curl http://localhost:8181/v1/policies
 ```
 
-Simple example of using the above rule in Python
+Simple example of using the above rule in Python:
 ```python
 @app.route('/home')
 def hello_world():

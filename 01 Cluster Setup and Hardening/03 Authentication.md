@@ -10,10 +10,10 @@ Here we will talk about users accessing the cluster, not the end user applicatio
 
 We have two types of users, humans and bots  
 
-Kubernetes does not manage "Human" end users, it relies on other authentication mechanisms such as LDAP  
+Kubernetes does not manage "Human" end users, it relies on other authentication mechanisms such as LDAP.
 Kubernetes can manage bot accounts using "Service Accounts"  
 
-The `kube-apiserver` manages all access to the Kubernetes cluster weather it be via `kubectl` or the API directly.
+The `kube-apiserver` manages all access to the Kubernetes cluster whether it be via `kubectl` or the API directly.
 
 The `kube-apiserver` supports the following authentication mechanisms
 

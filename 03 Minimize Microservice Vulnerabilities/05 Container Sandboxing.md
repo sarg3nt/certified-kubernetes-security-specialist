@@ -21,17 +21,17 @@ gVisor has two components
 - Gofer: A file proxy which impplements components needed for containers to talk to the file system
 - gVisor has its own networking stack so the container does not need to interact with the host network
 
-Each container has its own gVisor which isolates the containers from each other
+Each container has its own gVisor which isolates the containers from each other.
 
 Disadvantages of gVisor
 - Not all apps work with gVisor
-- Increases latency as there is more for the CPU to do
+- Increases latency as there is more for the CPU to do.
 
 Whereas Docker uses `runC` as the base runtime, gVisor uses the `runsc` runtime to start containers
 
 ## Kata Containers
 
-Kata inserts each container into it's own light weight VM  
+Kata inserts each container into its own lightweight VM  
 This does add some latency and increases resource usage  
 Many cloud providers do not support Kata as it requires nested virtualization which is usually very poor  
 Works well for bare metal servers

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Certified Kubernetes Security Specialist Training Notes"
+title: "Certified Kubernetes Security Spec- [05 Scan Images for Known Vulnerabilities](04%20Supply%20Chain%20Security/05%20Scan%20Images%20for%20Known%20Vulnerabilities)alist Training Notes"
 ---
 
 # Certified Kubernetes Security Specialist Training Notes
@@ -60,7 +60,7 @@ These notes are not meant to be a complete record of the training but to be used
 - [02 Image Security](04%20Supply%20Chain%20Security/02%20Image%20Security)
 - [03 Whitelist Allowed Registries](04%20Supply%20Chain%20Security/03%20Whitelist%20Allowed%20Registries)
 - [04 Use Static Analysis of User Workloads](04%20Supply%20Chain%20Security/04%20Use%20Static%20Analysis%20of%20User%20Workloads)
-- [05 Scan Images for Know Vulnerabilities](04%20Supply%20Chain%20Security/05%20Scan%20Images%20for%20Know%20Vulnerabilities)
+- [05 Scan Images for Known Vulnerabilities](04%20Supply%20Chain%20Security/05%20Scan%20Images%20for%20Known%20Vulnerabilities)
 
 ### 05 - Monitoring, Logging and Runtime Security
 - [01 Falco](05%20Monitoring,%20Logging%20and%20Runtime%20Security/01%20Falco)

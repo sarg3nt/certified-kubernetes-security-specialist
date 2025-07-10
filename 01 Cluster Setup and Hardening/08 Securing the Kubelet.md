@@ -57,7 +57,7 @@ The `kube-apiserver` must also have the kubelet client certificates configured
 
 Note: We often think of the `kube-apiserver` as only a server supporting clients, but in this instance it is the client calling the `kubelet`  
 ```yaml
-# Note: These are the same settings weather they are in the yaml file for a kubeadm based build or in the service config file at /etc/systemd/system/kube-apiserver.service for a service based build
+# Note: These are the same settings whether they are in the yaml file for a kubeadm based build or in the service config file at /etc/systemd/system/kube-apiserver.service for a service based build
 - --kubelet-client-certificate=/path/to/kubelet-cert.pem
 - --kubelet-client-key=/path/to/kubelet-key.pem
 ```

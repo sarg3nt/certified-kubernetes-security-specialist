@@ -1,8 +1,8 @@
 # Certified Kubernetes Security Specialist Training Notes
 
-These are the notes I've taken while takeing the [Certified Kubernetes Security Specialist](https://kodekloud.com/courses/certified-kubernetes-security-specialist-cks/) course on KodeKloud.
+These are the notes I've taken while taking the [Certified Kubernetes Security Specialist](https://kodekloud.com/courses/certified-kubernetes-security-specialist-cks/) course on KodeKloud.
 
-These notes are not meant to be a complete record of the training but to be used as a training aid.  I'm not going to be recording those things I already know really well.
+These notes are not meant to be a complete record of the training but to be used as a training aid. I'm not going to be recording those things I already know really well.
 
 ## Table of Contents
 
@@ -55,7 +55,7 @@ These notes are not meant to be a complete record of the training but to be used
 - [02 Image Security](04%20Supply%20Chain%20Security/02%20Image%20Security.md)
 - [03 Whitelist Allowed Registries](04%20Supply%20Chain%20Security/03%20Whitelist%20Allowed%20Registries.md)
 - [04 Use Static Analysis of User Workloads](04%20Supply%20Chain%20Security/04%20Use%20Static%20Analysis%20of%20User%20Workloads.md)
-- [05 Scan Images for Know Vulnerabilities](04%20Supply%20Chain%20Security/05%20Scan%20Images%20for%20Know%20Vulnerabilities.md)
+- [05 Scan Images for Known Vulnerabilities](04%20Supply%20Chain%20Security/05%20Scan%20Images%20for%20Known%20Vulnerabilities.md)
 
 ### 05 - Monitoring, Logging and Runtime Security
 - [01 Falco](05%20Monitoring,%20Logging%20and%20Runtime%20Security/01%20Falco.md)

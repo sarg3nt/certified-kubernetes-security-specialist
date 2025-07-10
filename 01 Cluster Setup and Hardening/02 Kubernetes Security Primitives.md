@@ -31,4 +31,4 @@ Secure the communication between different core components
 ## Network Policy
 
 Control what pods can talk to what  
-By default all pods can talk to all other pods in the cluster, this is not good for security
+By default all pods can talk to all other pods in the cluster, this is not good for security.

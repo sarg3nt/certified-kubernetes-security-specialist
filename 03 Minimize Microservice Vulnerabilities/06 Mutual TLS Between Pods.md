@@ -6,7 +6,7 @@ Mutual TLS between pods uses TLS certs to mutually validate each pod is who they
 
 Pod 1 sends a request to Pod 2 --> Pod 2 responds with their public key but it also asks for Pod 1s certificate --> Pod 1 encrypts the symmetric key with Pod 2s public cert but also sends its own public cert with the response --> Pod 2 then validates Pod 1s certificate and decrypts the symmetric key with its private key.  If all goes well, they then use the symmetric key to encrypt communication
 
-Both pods proved to each other that they are both the real prods in the cluster
+Both pods proved to each other that they are both the real pods in the cluster.
 
 With the added encryption on top of this our traffic is now very secure  
 

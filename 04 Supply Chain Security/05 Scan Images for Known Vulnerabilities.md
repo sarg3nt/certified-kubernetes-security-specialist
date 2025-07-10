@@ -1,13 +1,13 @@
-# Scan Images for Know Vulnerabilities
+# Scan Images for Known Vulnerabilities
 
 ## What is a CVE
 
 Common Vulnerabilities and Exposures (CVE)  
 A central database that anyone can submit vulnerabilities and exposures to  
-Each CVE gets a unique identifier
+Each CVE gets a unique identifier.
 
 What kind of bugs get CVEs?  Usually one of the following: 
-- Anything that lets an attacker bypass security and do something they should not be able to
+- Anything that lets an attacker bypass security and do something they should not be able to.
 - Anything that allows an attacker to degrade performance / interrupt service, etc. 
 
 CVSS v3.0 ratings have the following levels.
@@ -21,15 +21,15 @@ CVSS v3.0 ratings have the following levels.
 
 Looks at services on our system and displays a list of vulnerabilities  
 
-Once we've identified a vulnerability we can mitigate it in one of the following ways
+Once we've identified a vulnerability we can mitigate it in one of the following ways:
 
-- Upgrade the component if a new version fixes it
-- Uninstall the component if we do not need it
-- Apply some mitigating or compensating control if they exist
+- Upgrade the component if a new version fixes it.
+- Uninstall the component if we do not need it.
+- Apply some mitigating or compensating control if they exist.
 
 ## Vulnerability Scanner Trivy
 
-By Aqua Security
+By Aqua Security.
 
 ```sh
 # Get help
@@ -45,7 +45,7 @@ trivy image --severity CRITICAL,HIGH nginx:1.18.0
 # Ignore unfixed vulns
 trivy image --ignore-unfixed nginx:1.18.0
 
-# Us a tar image as input
+# Use a tar image as input
 docker save nginx:1.18.0 > nginx.tar
 trivy image --input archive.tar
 

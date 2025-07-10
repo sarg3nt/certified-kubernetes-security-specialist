@@ -9,9 +9,9 @@ Mutating ACs are generally ran before Validating ACs
 
 ## Creating our Own ACs
 
-To facilitate the creation of custom ACs there are two built in ACs called `MutatingAdmissionsWebhook` and `ValidatingAdmissionWebhook`
+To facilitate the creation of custom ACs there are two built in ACs called `MutatingAdmissionsWebhook` and `ValidatingAdmissionWebhook`.
 
-Webhook processing takes place after all the other built in ACs  
+Webhook processing takes place after all the other built in ACs.
 
 ### Develop and Deploy a Webhook Service  
 
